@@ -1,0 +1,13 @@
+{
+"type": "FeatureCollection",
+"features": [
+{ "type": "Feature", "properties": { "venues": "Lausanne" }, "geometry": { "type": "Point", "coordinates": [ 6.6322734, 46.5196535 ] } },
+{ "type": "Feature", "properties": { "venues": "Les Diablerets" }, "geometry": { "type": "Point", "coordinates": [ 7.158056, 46.351389 ] } },
+{ "type": "Feature", "properties": { "venues": "Leysin" }, "geometry": { "type": "Point", "coordinates": [ 7.012033, 46.3435634 ] } },
+{ "type": "Feature", "properties": { "venues": "Villars" }, "geometry": { "type": "Point", "coordinates": [ 7.0550134, 46.2984285 ] } },
+{ "type": "Feature", "properties": { "venues": "Vallée de Joux " }, "geometry": { "type": "Point", "coordinates": [ 6.25, 46.6 ] } },
+{ "type": "Feature", "properties": { "venues": "Les Tuffes" }, "geometry": { "type": "Point", "coordinates": [ 6.0640367, 46.417043799999988 ] } },
+{ "type": "Feature", "properties": { "venues": "Champéry" }, "geometry": { "type": "Point", "coordinates": [ 6.8747591, 46.1816543 ] } },
+{ "type": "Feature", "properties": { "venues": "St. Moritz" }, "geometry": { "type": "Point", "coordinates": [ 9.8355079, 46.4907973 ] } }
+]
+}
