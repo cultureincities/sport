@@ -42,6 +42,8 @@
 
   <!-- add mapbox styles -->
     <style>
+        /* body { margin: 0; padding: 0; }
+        #map { width: 100%; height: 100%; } */
         body { margin-top: 0; padding: 0; }
         #map {  
                 display: inline-block; 
@@ -124,132 +126,122 @@
             <!-- --- BEGINNNING of div container for the map--- -->
             <div class="map">
               
-              <!-- <div class="w-embed w-script">
+              <!-- <div class="w-embed w-script"> -->
+
               <!-- style the pop up -->
               <style>
+                #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+                
                 .mapboxgl-popup {
                   max-width: 400px;
                   font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
                 }
 
-                .marker {
-                  background-image: url('http://cultureincities.com/sport/images/logo.png');
+                .mapboxgl-marker {
+                  background-image: url('image/logo.png');
                   background-size: cover;
                   width: 50px;
                   height: 50px;
-                  border-radius: 50%;
                   cursor: pointer;
                 }
-
               </style>
-              <!-- .marker {
-                  background-image: url('https://cultureincities.com/sport/images/logo.png');
-                  background-size: cover;
-                  width: 50px;
-                  height: 50px;
-                  border-radius: 50%;
-                  cursor: pointer;
-                }-->
 
               <!-- the mapbox div for the map -->
               <!-- <div id="map" class="map"> -->
               <div id="map"></div>
+                            <script>
+              	mapboxgl.accessToken = 'pk.eyJ1IjoiYXZ1aWxsaSIsImEiOiJjazY1N3Q3MG4wOGFjM2tvNGo4aDlyamN5In0.sD99_EJ71yWj5o_Grdko0Q';
+              var map = new mapboxgl.Map({
+              container: 'map',
+              style: 'mapbox://styles/mapbox/light-v10',
+              center: [-96, 37.8],
+              zoom: 3
+              });
 
-              <!-- the javascript for mapbox -->
-              <script>
+              map.on('load', function() {
+              map.addSource('points', {
+              'type': 'geojson',
+              'data': {
+              'type': 'FeatureCollection',
+              'features': [
+              {
+              // feature for Mapbox DC
+              'type': 'Feature',
+              'geometry': {
+              'type': 'Point',
+              'coordinates': [
+              -77.03238901390978,
+              38.913188059745586
+              ]
+              },
+              'properties': {
+              'title': 'Mapbox DC',
+              'icon': 'monument'
+              }
+              },
+              {
+              // feature for Mapbox SF
+              'type': 'Feature',
+              'geometry': {
+              'type': 'Point',
+              'coordinates': [-122.414, 37.776]
+              },
+              'properties': {
+              'title': 'Mapbox SF',
+              'icon': 'harbor'
+              }
+              }
+              ]
+              }
+              });
+              map.addLayer({
+              'id': 'points',
+              'type': 'symbol',
+              'source': 'points',
+              'layout': {
+              // get the icon name from the source's "icon" property
+              // concatenate the name to get an icon from the style's sprite sheet
+              'icon-image': ['concat', ['get', 'icon'], '-15'],
+              // get the title name from the source's "title" property
+              'text-field': ['get', 'title'],
+              'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
+              'text-offset': [0, 0.6],
+              'text-anchor': 'top'
+              }
+              });
+              });
+              </script>
+              <!-- <script>
                 mapboxgl.accessToken = 'pk.eyJ1IjoiYXZ1aWxsaSIsImEiOiJjazY1N3Q3MG4wOGFjM2tvNGo4aDlyamN5In0.sD99_EJ71yWj5o_Grdko0Q';
 
                 var map = new mapboxgl.Map({
                     container: 'map', // container id
-                    style: 'mapbox://styles/mapbox/light-v10',
-                    // style: 'mapbox://styles/avuilli/ck9gyqj7y0usu1ir0ncbarwfz', // stylesheet location
-                    center: [6.6835, 46.1199], // starting position [lng, lat]
+                    style: 'mapbox://styles/avuilli/ck9gyqj7y0usu1ir0ncbarwfz', // stylesheet location
+                    center: [6.6335, 46.5199], // starting position [lng, lat]
                     zoom: 8 // starting zoom
                   });
 
-                // https://docs.mapbox.com/help/tutorials/create-interactive-hover-effects-with-mapbox-gl-js/
-                
                 //main function to load the map
-                map.on('load', function() {
-                  map.addSource('venues',{
-                     'type':'geojson',
-                     'data': 'http://cultureincities.com/sport/data/lausanne2020_venues.geojson'      
-                   });
-                 
+                map.on('load', function() { 
+
+                    map.addSource('marker', { 
+                      type: 'geojson',
+                      data: 'data/lausanne2020_venues.geojson',
+                  });
+                
                   map.addLayer({
-                     'id':'venue-viz',
-                     'type':'circle',
-                     'source':'venues',
-                     'paint':{
-                       'circle-stroke-color':'#de5b91',
-                       'circle-stroke-width':1,
-                       'circle-color':'#de5b91'
-                     }
-                   });
-                });
-                  // Add Symbol to the venues location
-              //  map.addLayer({
-              //    id: 'lausanne-venues-points',
-              //    type: 'symbol',
-              //    source: {
-              //        type: 'geojson',
-              //        data: 'http://cultureincities.com/sport/data/lausanne2020_venues.geojson'
-              //      },
-              //    layout: {
-              //        'text-field': ['get', 'venues'],
-              //        'text-font': ['Open Sans Semibold'],
-              //        'text-offset': [0, 0.4],
-              //        'text-anchor': 'top'
-              //      }
-                //    });
-                //  map.on('click', function(el) {
-                //    // create a HTML element for each feature
-                //    el = document.createElement('div');
-                //    el.className = 'marker';
-                //    el.style.backgroundImage = 'url("https://cultureincities.com/sport/images/logo.png")';
-                //    
-                //    // make a marker for each feature and add to the map
-                //    new mapboxgl.Marker(el)
-                //     .addTo(map)
-          //       });
-                // Add Popup to the symbol
-                 map.on('click', function(e) {
-                   var features = map.queryRenderedFeatures(e.point,
-                   { 
-                     // layers:['lausanne-venues-points']
-                     layers:['lausanne-venues-points']
-                   });
-                   if (!features.length){
-                     return;
-                   }
-                   var feature = features[0]
-                   var popup = new mapboxgl.Popup({offset: [0,-15]
-                   })
-                       .setLngLat(feature.geometry.coordinates)
-                       .setHTML("Venue Name: "+ feature.properties.venues)
-                       .addTo(map);
-                 });
-
-          //         // Open popups on hover
-          //         map.on('mouseenter', 'lausanne-venues-points', function() {
-          //           map.getCanvas().style.cursor = 'pointer';
-          //         });    
-          //         // Change it back to a pointer when it leaves.
-          //         map.on('mouseleave', 'lausanne-venues-points', function() {
-          //           map.getCanvas().style.cursor = '';
-          //         });
-          //       });
-              </script>
-              <div class='venue-info'>
-                <div><strong>Location:</strong> <span id='location'></span></div>
-                <div><strong>Sport:</strong> <span id='sport'></span></div>
-              </div>
-              <script>
-              var locationDisplay = document.getElementById('location');
-              var sportDisplay = document.getElementById('sport');   
-              </script>
-
-
+                      id: 'venues-location',
+                      type: 'symbol',
+                      source: 'marker',
+                      properties: {
+                        icon : {
+                          iconUrl: 'images/logo.png',
+                          iconSize: [50,50]
+                        }
+                      }
+                   }) 
+                  });
+              </script> -->
             
             </div>
           <!-- --- END of div container for the map--- -->
