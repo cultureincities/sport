@@ -53,7 +53,29 @@
                 margin: 0 auto;
                 padding: 0;
                }
+        #map-sm{  
+                position: absolute; 
+                width: 100%;
+                height: 80vh;
+                margin: 0 auto;
+                padding: 0;
+               }
 
+        .mapboxgl-popup {
+                  max-width: 400px;
+                  font: 12px/20px 'Montserrat', Arial, Helvetica, sans-serif;
+                }
+        .mapboxgl-popup-content {
+                  margin: 0;
+                  padding: 10px;
+                  border-radius: 2px 2px 0 0;
+                  font-weight: 400;
+                  margin-top: 0px;
+                 }  
+        .mapboxgl-popup-content h5 {
+                  color: #de5b91;
+                  font-weight: 400;
+                 }         
     </style>
 </head>
 
@@ -66,37 +88,6 @@
   <!-- Promise polyfill script required to use Mapbox GL Geocoder in IE 11 -->
   <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
-
-  <!-- ---------- Style for Scrolly Telling Mapbox ----------  -->
-  <!-- <style>
-    #map {  
-      position: fixed; 
-      width: 50%;
-    }
-
-    #features {
-      width: 50%;
-      margin-left: 50%;
-      font-family: sans-serif;
-      overflow-y: scroll;
-      background-color: #fafafa;
-    }
-
-    section {
-      padding: 25px 50px;
-      line-height: 25px;
-      border-bottom: 1px solid #ddd;
-      opacity: 0.25;
-      font-size: 13px;
-    }
-    section.active {
-      opacity: 1;
-    }
-    section:last-child {
-      border-bottom: none;
-      margin-bottom: 200px;
-    }
- </style> -->
 
   <!-- ---------- Beginning of All Sections ----------  -->
   <!-- Section 0 - Website Title -->
@@ -130,11 +121,12 @@
 
               <!-- Mapbox Style PopUp -->
               <style>
-                #map {  
-                  position: fixed; 
-                  width: 50%;
+                #map {
+                    height: 80vh;
+                    width: 100%;
+                    position: absolute;
+                    z-index: -5;
                 }
-            
                 #features {
                   width: 50%;
                   margin-left: 50%;
@@ -156,29 +148,6 @@
                 section:last-child {
                   border-bottom: none;
                   margin-bottom: 200px;
-                }
-
-                .mapboxgl-popup-content {
-                  max-width: 400px;
-                  font: 12px/20px 'Montserrat', Arial, Helvetica, sans-serif;
-                }
-
-                .mapboxgl-popup-content h5 {
-                  color: #d01d76;
-                  margin: 0;
-                  padding: 10px;
-                  border-radius: 2px 2px 0 0;
-                  font-weight: 400;
-                  margin-top: 0px;
-                }
-
-                .marker {
-                  background-image: url('http://cultureincities.com/sport/images/logo.png');
-                  background-size: cover;
-                  width: 50px;
-                  height: 50px;
-                  border-radius: 50%;
-                  cursor: pointer;
                 }
               </style>
 
@@ -245,7 +214,7 @@
 
                   map.addSource('geoboundaries',{
                       'type':'geojson',
-                      'data': 'http://cultureincities.com/sport/data/geometry_venues.geojson'      
+                      'data': 'http://cultureincities.com/sport/data/GeoJson/geometry_venues.geojson'      
                    });  
 
                   map.addLayer({
@@ -270,7 +239,7 @@
 
                   map.addSource('venues',{
                       'type':'geojson',
-                      'data': 'http://cultureincities.com/sport/data/lausanne2020_venues.geojson'      
+                      'data': 'http://cultureincities.com/sport/data/GeoJson/lausanne2020_venues.geojson'      
                   });
                  
                   map.addLayer({
@@ -297,7 +266,7 @@
                       map.getCanvas().style.cursor = 'pointer';
                       popup
                         .setLngLat(e.lngLat)
-                        .setHTML('<h5>'+ e.features[0].properties.venues+ '</h5>')
+                        .setHTML(e.features[0].properties.venues)
                         .addTo(map);
                     });
                     
@@ -370,7 +339,6 @@
                     var bounds = element.getBoundingClientRect();
                     return bounds.top < window.innerHeight && bounds.bottom > 0;
                 }
-
               </script>
 
         <!-- End of Div MapBox  -->
@@ -379,36 +347,137 @@
       
       </div>
       <!-- End Mapbox Scrolling Telling --> 
-      
-      <div class="map_textbox">
-        <p class="paragraph">Introduction to Lausanne 2020 - Youth Olampic Games</p>
-        <div class="scroll_textbox-part1">
-          <div class="fly-dis">Lausanne</div>
-        </div>
-        <div class="scroll_textbox-part2">
-          <div class="fly-dis">La Vallé de Joux</div>
-        </div>
-      </div>
     </div>
   </div>
   <!-- End Section 1 - Mapbox ScrollingTelling Map -->
 
+  <!-- ************************** -->
   <div class="horizontal-line"></div>
+  <!-- ************************** -->
 
   <!-- Section 2 - Timeline Graphs -->
   <div class="section">
-    <div class="mycontainer">
-      <div class="text">
-        <p class="paragraph">TimeLine Graphs ! Instagram and Twitter! </p>
-      </div>
-      <div class="timeserie_g">
-        <div class="w-embed"></div>
-      </div>
-    </div>
-  </div>
-  <!-- End Section 2 - Timeline Graphs -->
+    <div class="mycontainer part2">
+    
+    <!-- Beginning Mapbox Instagram Point -->
+      <div class="map_scrolltell">
+        <h2 class="map_h2">Where did Social Media posts happen during the Youth Olympic Games Lausanne2020?</h2>
+        <h4 class="map_h4">Social media activity of #Lausanne2020, January 2020</h4>
+        
+        <div class="map_mapbox">
+          <div class="map-sm"> 
+          <!-- ---- DivId MapBox ---- -->
+              <div id="map-sm"></div>
+              <!-- the javascript for mapbox -->
+              <script>
+                mapboxgl.accessToken = 'pk.eyJ1IjoiYXZ1aWxsaSIsImEiOiJjazY1N3Q3MG4wOGFjM2tvNGo4aDlyamN5In0.sD99_EJ71yWj5o_Grdko0Q';
 
+                var map_sm = new mapboxgl.Map({
+                    container: 'map-sm', // container id
+                    style: 'mapbox://styles/mapbox/light-v10',
+                    // style: 'mapbox://styles/avuilli/ck9gyqj7y0usu1ir0ncbarwfz', // stylesheet location
+                    center: [6.5835, 46.5199], // starting position [lng, lat]
+                    zoom: 8, // starting zoom 
+                    minZoom: 8 // Maximum Zoom out !
+                  });
+
+                //main function to load the map
+                map_sm.on('load', function() {  
+
+                  map_sm.addSource('geo-district',{
+                      'type':'geojson',
+                      'data': 'https://cultureincities.com/sport/data/GeoJson/geometry_district.geojson'      
+                  });  
+
+                  map_sm.addLayer({
+                      'id': 'geo-district-line-viz',
+                      'type': 'line',
+                      'source': 'geo-district',
+                      'paint': {
+                        'line-color': '#055e8e',
+                        'line-width': 0.2
+                      }
+                  });            
+
+                  map_sm.addSource('venues',{
+                      'type':'geojson',
+                      'data': 'https://cultureincities.com/sport/data/GeoJson/lausanne2020_venues.geojson'      
+                  });
+               
+                  map_sm.addLayer({
+                      'id':'venues-viz',
+                      'type':'circle',
+                      'source':'venues',
+                      'paint':{
+                        'circle-color':'#de5b91',
+                        'circle-radius':20,
+                        'circle-opacity':0.6
+                      }
+                  });
+
+                  map_sm.addSource('geo-social',{
+                      'type':'geojson',
+                      'data': 'https://cultureincities.com/sport/data/social/social_vaud_january_2020.geojson'      
+                  });
+                  
+                  map_sm.addLayer({
+                      'id': 'geo-social-viz',
+                      'type': 'circle',
+                      'source': 'geo-social',
+                      'paint': {
+                        'circle-color':'#870b3e',
+                        'circle-radius': 2.5
+                      }
+                  });
+
+                  // Change the cursor to a pointer when the mouse is over the location
+                  map_sm.on('click', 'venues-viz', function(e) {
+                  // Create Popup on Click
+                  new mapboxgl.Popup()
+                      .setLngLat(e.lngLat)
+                      .setHTML('<h5>Venue Name: '+e.features[0].properties.venues+'</h5>')
+                      .addTo(map_sm);
+                  });
+                
+                  // Change cursos to a pointer when the mouse is over states layer!
+                  map_sm.on('mouseenter', 'venues-viz', function() {
+                      map_sm.getCanvas().style.cursor = 'pointer';
+                  });
+
+                  // Change it back to when the mouse leaves, close the popup!
+                  map_sm.on('mouseleave', 'venues-viz', function() {
+                      map_sm.getCanvas().style.cursor = '';
+                  });
+                });  
+              </script>
+          
+          <!-- End of div map social media "map-sm" -->
+          </div>
+        <!-- End of div map "mapbox" -->  
+        </div>
+    <!-- End of div "map_scrolltell" --> 
+    </div>
+
+    <!-- Beginn of div "mapcontainer_text" caption for the map-->
+    <div class="mapcontainer_text">
+      <h4 class="container_h4">Social Media Activity</h4>
+      <p class="paragraph">La Vallée de Joux: Arthur Cadogan West was found dead, head crushed in on train tracks
+                      at Aldgate Station at 6AM Tuesday morning. West worked at Woolwich
+                      Arsenal on the Bruce-Partington submarine, a secret military
+                      project. Plans for the submarine had been stolen and seven of the
+                      ten missing papers were found in West's possession. Mycroft implores
+                      Sherlock to take the case and recover the three missing papers.</p>
+    <!-- End of div "mapcontainer_text" map caption -->
+    </div>
+   
+   <!-- End of div container "mycontainer part2" -->
+    </div>
+  <!-- End of div section -->
+  </div>
+
+  <!-- ************************** -->
   <div class="horizontal-line"></div>
+  <!-- ************************** -->
 
   <!-- Section 3 - AirBnb Map -->
   <div class="section">
@@ -416,14 +485,15 @@
 
      <!-- Beginning Mapbox Airbnb -->
       <div class="map_scrolltell">
-        <h1 class="map_h2">Where to stay during the Youth Olympic Games in Lausanne 2020, Switzerland</h1>
+        <h2 class="map_h2">Where to stay during the Youth Olympic Games in Lausanne 2020, Switzerland</h1>
+        <h4 class="map_h4">Demand in AirBnB. Comparaison between January 2019 and January 2020. </h4>
         
         <div class="map_mapbox">
           <div class="map-airbnb">
               
               <!-- ---- DivId MapBox ---- -->
               <div id="map-airbnb"></div>
-                        <!-- the javascript for mapbox -->
+              <!-- the javascript for mapbox -->
               <script>
                 mapboxgl.accessToken = 'pk.eyJ1IjoiYXZ1aWxsaSIsImEiOiJjazY1N3Q3MG4wOGFjM2tvNGo4aDlyamN5In0.sD99_EJ71yWj5o_Grdko0Q';
 
@@ -443,7 +513,7 @@
 
                   map_airbnb.addSource('geo-communes',{
                       'type':'geojson',
-                      'data': 'http://cultureincities.com/sport/data/geometry_district.geojson'      
+                      'data': 'https://cultureincities.com/sport/data/airbnb/airbnb_vaud_reviews_2019_2020.geojson'      
                    });  
 
                   map_airbnb.addLayer({
@@ -451,8 +521,20 @@
                       'type': 'fill',
                       'source': 'geo-communes',
                       'paint': {
-                        'fill-color': '#055e8e',
-                        'fill-opacity': 0.2
+                        'fill-color': [
+                        'interpolate',
+                        ['linear'],
+                        ['number',['get','demand_change_19_20']],
+                        0,'transparent',
+                        100,'#daecf6',
+                        200,'#aed0e3',
+                        300,'#87b6d1',
+                        400,'#649ebe',
+                        500,'#4688ac',
+                        600,'#2c7399',
+                        700,'#175f87',
+                        800,'#064e75'],
+                        'fill-opacity': 0.8
                       }
                   }); 
 
@@ -464,76 +546,78 @@
                         'line-color': '#055e8e',
                         'line-width': 0.2
                       }
-                  });              
+                  });            
 
-            //    map_airbnb.addSource('venues',{
-            //        'type':'geojson',
-            //        'data': 'http://cultureincities.com/sport/data/lausanne2020_venues.geojson'      
-            //    });
-            //   
-            //    map_airbnb.addLayer({
-            //        'id':'venues-viz',
-            //        'type':'circle',
-            //        'source':'venues',
-            //        'paint':{
-            //          'circle-stroke-color':'#de5b91',
-            //          'circle-stroke-width':0.4,
-            //          'circle-color':'#de5b91'
-            //        }
-            //    });
-
-            //    // Popup on Hover
-            //    // Create a popup, but don't add it to the map yet.
-            //      var popup = new mapboxgl.Popup({
-            //        closeButton: false,
-            //        closeOnClick: false
-            //      });
-            //    
-            //      // Change the cursor to a pointer when the mouse is over the location
-            //      map_airbnb.on('mouseenter', 'venues-viz', function(e) {
-            //        map_airbnb.getCanvas().style.cursor = 'pointer';
-            //        popup
-            //          .setLngLat(e.lngLat)
-            //          .setHTML('<h5>'+ e.features[0].properties.venues+ '</h5>')
-            //          .addTo(map_airbnb);
-            //      });
-            //      
-            //      // Change it back to when the mouse leaves, close the popup.
-            //      map_airbnb.on('mouseleave', 'venues-viz', function() {
-            //          map_airbnb.getCanvas().style.cursor = '';
-            //          popup.remove()
-            //        });
+                map_airbnb.addSource('venues',{
+                    'type':'geojson',
+                    'data': 'http://cultureincities.com/sport/data/GeoJson/lausanne2020_venues.geojson'      
                 });
+               
+                map_airbnb.addLayer({
+                    'id':'venues-viz',
+                    'type':'circle',
+                    'source':'venues',
+                    'paint':{
+                      'circle-stroke-color':'#de5b91',
+                      'circle-stroke-width':0.2,
+                      'circle-color':'#de5b91'
+                    }
+                });
+
+                // Change the cursor to a pointer when the mouse is over the location
+                map_airbnb.on('click', 'geo-communes-fill-viz', function(e) {
+                  // Create Popup on Click
+                  new mapboxgl.Popup()
+                    .setLngLat(e.lngLat)
+                    .setHTML('<h5>Commune: '+e.features[0].properties.neighbourhood+'</h5>'
+                    +'<p>Change in demand: '+e.features[0].properties.demand_change_19_20+'</p>')
+                    .addTo(map_airbnb);
+                });
+                
+                // Change cursos to a pointer when the mouse is over states layer!
+                map_airbnb.on('mouseenter', 'geo-communes-fill-viz', function() {
+                    map_airbnb.getCanvas().style.cursor = 'pointer';
+                });
+
+                // Change it back to when the mouse leaves, close the popup!
+                map_airbnb.on('mouseleave', 'geo-communes-fill-viz', function() {
+                    map_airbnb.getCanvas().style.cursor = '';
+                });
+              });
               </script>
 
-          <!-- End of Div Map AirBnB  -->
+          <!-- End of div map airbnb "map-airbnb" -->
           </div>
-        <!-- End of Div Map MapBox  -->  
+        <!-- End of div map "mapbox" -->  
         </div>
-
-    <!-- End of Div Map Section3 --> 
+    <!-- End of div "map_scrolltell" --> 
     </div>
-      <div class="map_textbox">
-        <p class="paragraph">Introduction to Lausanne 2020 - Youth Olampic Games</p>
-        <div class="scroll_textbox-part1">
-          <div class="fly-dis">Lausanne</div>
-        </div>
-        <div class="scroll_textbox-part2">
-          <div class="fly-dis">La Vallé de Joux</div>
-        </div>
-      </div>
 
-    <!-- End of Section3 Container -->
+    <!-- Beginn of div "mapcontainer_text" caption for the map-->
+    <div class="mapcontainer_text">
+      <h4 class="container_h4">Demand in AirBnb</h4>
+      <p class="paragraph">La Vallée de Joux: Arthur Cadogan West was found dead, head crushed in on train tracks
+                      at Aldgate Station at 6AM Tuesday morning. West worked at Woolwich
+                      Arsenal on the Bruce-Partington submarine, a secret military
+                      project. Plans for the submarine had been stolen and seven of the
+                      ten missing papers were found in West's possession. Mycroft implores
+                      Sherlock to take the case and recover the three missing papers.</p>
+    <!-- End of div "mapcontainer_text" map caption -->
     </div>
-  <!-- End Section 3 - AirBnb Map -->
+   
+   <!-- End of div container "mycontainer part3" -->
+    </div>
+  <!-- End of div section 3-->
   </div>
-  
+
+  <!-- ************************** -->
   <div class="horizontal-line"></div>
+  <!-- ************************** -->
 
   <!-- Section 4 - Methods -->
   <div class="section">
-    <div class="mycontainer method text">
-      <h4 class="method_h4">Method</h4>
+    <div class="mycontainer text">
+      <h4 class="container_h4">Method</h4>
       <p class="paragraph">Lausanne Sport Map and analysis has been made as part of the Bring Your Own Map CASA students project (#BYOM_casa). We were interested to research the social media activity of the youth olympic games to better understand the moments people share with other. Write anything interesting over here .... ! </p>
     </div>
   </div>

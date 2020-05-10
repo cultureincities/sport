@@ -45,7 +45,6 @@
 .mycontainer.part1 {
   display:flex;
   position:relative;
-
   /* display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -66,11 +65,32 @@
   align-items: stretch; */
 }
 
-.mycontainer.part3 {
+.mycontainer.part3
+.mycontainer.part2 {
+  position:relative;
+  display: flex;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
-  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-box-align: stretch;
+  -webkit-align-items: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+}
+
+.mapcontainer_text {
+  max-width: 60%;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .mycontainer.text {
@@ -129,8 +149,9 @@
   width: auto;
   height: auto;
   min-height: 700px;
-  min-width: 400px;
+  min-width: 300px;
   margin-top: 0px;
+  margin-bottom: 20px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
@@ -149,7 +170,6 @@
   -ms-flex: 1;
   flex: 1;
 }
-
 .map_textbox {
   position:relative;
   padding: 20px 20px;
@@ -164,7 +184,6 @@
   font: inherit;
 }
 
-
 .map_h2 {
   margin-top: 0px;
   font-family: Inconsolata, monospace;
@@ -173,14 +192,23 @@
   line-height: 30px;
   font-weight: 400;
 }
-
+.map_h4 {
+  margin-top: 0px;
+  font-family: Inconsolata, monospace;
+  color: #055e8e;
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 400;
+}
 .horizontal-line {
   margin: 20px 20px;
   border: 2px solid #de5b91;
   border-radius: 4px;
 }
-
-.method_h4 {
+.mapcontainer_text{
+  padding: 30px 0px 0px 0px;
+}
+.container_h4 {
   font-family: Inconsolata, monospace;
   line-height: 22px;
   text-align: center;
@@ -222,6 +250,9 @@
   .mycontainer.text {
     max-width: 70%;
   }
+  .mapcontainer_text {
+    max-width: 70%;
+  }
   .project_name {
     font-size: 22px;
     line-height: 26px;
@@ -246,10 +277,10 @@
 }
 
 @media screen and (max-width: 767px) {
-  .mycontainer.method.text {
+  .mycontainer.text {
     max-width: 85%;
   }
-  .mycontainer.text {
+  .mapcontainer_text {
     max-width: 85%;
   }
   .project_name {
@@ -275,6 +306,9 @@
   }
   .text {
     max-width: 85%;
+  }
+  .mapcontainer_text{
+    padding: 20px 0px 0px 0px;
   }
 }
 
@@ -304,6 +338,13 @@
     -ms-flex-order: -1;
     order: -1;
   }
+  .mapcontainer_text{
+    padding: 20px 0px 0px 0px;
+  }
+  .map-airbnb{
+    max-width: 100%;
+    margin-right: auto;
+  }
   .horizontal-line {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -317,7 +358,7 @@
     -ms-flex-order: 0;
     order: 0;
   }
-  .method_h4 {
+  .container_h4 {
     color: #055e8e;
   }
   .grid.footpage {

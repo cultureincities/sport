@@ -44,12 +44,12 @@
   margin-left: 20px;
 }
 
-/*.mycontainer.part3 {
+.mycontainer.part3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-} */
+} 
 
 .mycontainer.text {
   max-width: 60%;
@@ -118,7 +118,7 @@
    height: auto;
  } */
 
-.map_mapbox {
+/* .map_mapbox {
   position: relative;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
@@ -137,25 +137,6 @@
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
-}
-
-
-/* Add this style based on the Pudding */
-/* Add the entire style for this box 
-refer to left-container-map-fixed */
-/* .map_mapbox {
-  position:relative;
-  margin: auto;
-  top:0px;
-  left:0px;
-  bottom:auto;
-  right:auto;
-}  */
-/* Add the entire style for this box 
-refer to left-container-map-fixed */
-/* mycontainer.part1.map {
-  position:relative;
-  width: 600px;
 } */
 
 /* Add this style based on the Pudding */

@@ -53,6 +53,12 @@
             position: absolute;
             z-index: -5;
         }
+        #map_part3 {
+            height: 80vh;
+            width: 100%;
+            position: relative;
+            z-index: -5;
+        }
         a, a:hover, a:visited {
             color: #0071bc;
         }
@@ -502,117 +508,97 @@
     <div class="mycontainer part3">
 
      <!-- Beginning Mapbox Airbnb -->
-      <div class="map_scrolltell">
+      <div class="map_mapbox">
         <h1 class="map_h2">Where to stay during the Youth Olympic Games in Lausanne 2020, Switzerland</h1>
         
-        <div class="map_mapbox">
-          <div class="map-airbnb">
+        <div class="map">
+          <div id="map_part3"></div>
+          <script>
+          mapboxgl.accessToken = 'pk.eyJ1IjoiYXZ1aWxsaSIsImEiOiJjazY1N3Q3MG4wOGFjM2tvNGo4aDlyamN5In0.sD99_EJ71yWj5o_Grdko0Q';
+
+          var map_airbnb = new mapboxgl.Map({
+              container: 'map_part3', // container id
+              style: 'mapbox://styles/mapbox/light-v10',
+              // style: 'mapbox://styles/avuilli/ck9gyqj7y0usu1ir0ncbarwfz', // stylesheet location
+              center: [6.8835, 46.5199], // starting position [lng, lat]
+              zoom: 8, // starting zoom 
+              minZoom: 8 // Maximum Zoom out !
+            })
+            // https://docs.mapbox.com/help/tutorials/create-interactive-hover-effects-with-mapbox-gl-js/
+            
+          //main function to load the map
+          map_airbnb.on('load', function() {
+            map_airbnb.addSource('geoboundaries',{
+                'type':'geojson',
+                'data': 'http://cultureincities.com/sport/data/geometry_venues.geojson'      
+             });
+            map_airbnb.addLayer({
+                'id': 'geoboundaries-fill-viz',
+                'type': 'fill',
+                'source': 'geoboundaries',
+                'paint': {
+                  'fill-color': '#055e8e',
+                  'fill-opacity': 0.2
+                }
+            }); 
+
+            map_airbnb.addLayer({
+                'id': 'geoboundaries-line-viz',
+                'type': 'line',
+                'source': 'geoboundaries',
+                'paint': {
+                  'line-color': '#055e8e',
+                  'line-width': 0.4
+                }
+            });            
+            map_airbnb.addSource('venues',{
+                'type':'geojson',
+                'data': 'http://cultureincities.com/sport/data/lausanne2020_venues.geojson'      
+            });
+            
+            map_airbnb.addLayer({
+                'id':'venues-viz',
+                'type':'circle',
+                'source':'venues',
+                'paint':{
+                  'circle-stroke-color':'#de5b91',
+                  'circle-stroke-width':1,
+                  'circle-color':'#de5b91'
+                }
+            });
+
+            // Popup on Hov
+            // Create a popup, but don't add it to the map yet.
+            var popup = new mapboxgl.Popup({
+              closeButton: false,
+              closeOnClick: false
+            });
+            
+            // Change the cursor to a pointer when the mouse is over the location
+            map_airbnb.on('mouseenter', 'venues-viz', function(e) {
+              map_airbnb.getCanvas().style.cursor = 'pointer';
+              popup
+                .setLngLat(e.lngLat)
+                .setHTML('<h5>'+ e.features[0].properties.venues+ '</h5>')
+                .addTo(map);
+            });
               
-              <!-- ---- DivId MapBox ---- -->
-              <div id="map-airbnb"></div>
-                        <!-- the javascript for mapbox -->
-              <script>
-                mapboxgl.accessToken = 'pk.eyJ1IjoiYXZ1aWxsaSIsImEiOiJjazY1N3Q3MG4wOGFjM2tvNGo4aDlyamN5In0.sD99_EJ71yWj5o_Grdko0Q';
+            // Change it back to when the mouse leaves, close the popup.
+            map_airbnb.on('mouseleave', 'venues-viz', function() {
+                map_airbnb.getCanvas().style.cursor = '';
+                popup.remove()
+              });
+            });
+          </script>
 
-                var map_airbnb = new mapboxgl.Map({
-                    container: 'map-airbnb', // container id
-                    style: 'mapbox://styles/mapbox/light-v10',
-                    // style: 'mapbox://styles/avuilli/ck9gyqj7y0usu1ir0ncbarwfz', // stylesheet location
-                    center: [6.5835, 46.5199], // starting position [lng, lat]
-                    zoom: 8, // starting zoom 
-                    minZoom: 8 // Maximum Zoom out !
-                  });
-
-                // https://docs.mapbox.com/help/tutorials/create-interactive-hover-effects-with-mapbox-gl-js/
-                
-                //main function to load the map
-                map_airbnb.on('load', function() {  
-
-                  map_airbnb.addSource('geo-communes',{
-                      'type':'geojson',
-                      'data': 'http://cultureincities.com/sport/data/geometry_district.geojson'      
-                   });  
-
-                  map_airbnb.addLayer({
-                      'id': 'geo-communes-fill-viz',
-                      'type': 'fill',
-                      'source': 'geo-communes',
-                      'paint': {
-                        'fill-color': '#055e8e',
-                        'fill-opacity': 0.2
-                      }
-                  }); 
-
-                  map_airbnb.addLayer({
-                      'id': 'geo-communes-line-viz',
-                      'type': 'line',
-                      'source': 'geo-communes',
-                      'paint': {
-                        'line-color': '#055e8e',
-                        'line-width': 0.2
-                      }
-                  });              
-
-            //    map_airbnb.addSource('venues',{
-            //        'type':'geojson',
-            //        'data': 'http://cultureincities.com/sport/data/lausanne2020_venues.geojson'      
-            //    });
-            //   
-            //    map_airbnb.addLayer({
-            //        'id':'venues-viz',
-            //        'type':'circle',
-            //        'source':'venues',
-            //        'paint':{
-            //          'circle-stroke-color':'#de5b91',
-            //          'circle-stroke-width':0.4,
-            //          'circle-color':'#de5b91'
-            //        }
-            //    });
-
-            //    // Popup on Hover
-            //    // Create a popup, but don't add it to the map yet.
-            //      var popup = new mapboxgl.Popup({
-            //        closeButton: false,
-            //        closeOnClick: false
-            //      });
-            //    
-            //      // Change the cursor to a pointer when the mouse is over the location
-            //      map_airbnb.on('mouseenter', 'venues-viz', function(e) {
-            //        map_airbnb.getCanvas().style.cursor = 'pointer';
-            //        popup
-            //          .setLngLat(e.lngLat)
-            //          .setHTML('<h5>'+ e.features[0].properties.venues+ '</h5>')
-            //          .addTo(map_airbnb);
-            //      });
-            //      
-            //      // Change it back to when the mouse leaves, close the popup.
-            //      map_airbnb.on('mouseleave', 'venues-viz', function() {
-            //          map_airbnb.getCanvas().style.cursor = '';
-            //          popup.remove()
-            //        });
-                });
-              </script>
-
-          <!-- End of Div Map AirBnB  -->
-          </div>
-        <!-- End of Div Map MapBox  -->  
+        <!-- End of the div map  -->
         </div>
-
-    <!-- End of Div Map Section3 --> 
-    </div>
-      <div class="map_textbox">
-        <p class="paragraph">Introduction to Lausanne 2020 - Youth Olampic Games</p>
-        <div class="scroll_textbox-part1">
-          <div class="fly-dis">Lausanne</div>
-        </div>
-        <div class="scroll_textbox-part2">
-          <div class="fly-dis">La Vallé de Joux</div>
-        </div>
+      <!-- End of div map_mapbox  -->  
       </div>
-
-    <!-- End of Section3 Container -->
+    
+    <!-- End of div mycontainer part3 --> 
     </div>
-  <!-- End Section 3 - AirBnb Map -->
+  <!-- End Section 3  -->
   </div>
   
   <div class="horizontal-line"></div>
