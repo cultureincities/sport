@@ -79,7 +79,6 @@
     </style>
 </head>
 
-
 <!-- the body -->
 <body class="body">
 
@@ -99,101 +98,26 @@
   </div>
   <div class="section intro">
     <div class="mycontainer text">
-      <p class="paragraph">The city of Lausanne in the West of Switzerland hosted the Youth Olympic Games 2020 between 9 January to 22 January 2020. This scrollytelling project looks at some of the stories of the games and it's impact on the Conton of Vaud by analysing social media and AirBnB data. Please scroll down to unveil more! Hope you enjoy. </p>
-    </div>
+      <p class="paragraph">The city of Lausanne in the West of Switzerland hosted the Youth Olympic Games 2020 between 9 January to 22 January 2020. This visualisation project looks at some of the stories of the games and it's impact on the Canton of Vaud by analysing social media and AirBnB data. Please scroll down to unveil more! Hope you enjoy. </p>
+     </div>
   </div>
   <!-- End Section 0 - Website Title -->
   
   <div class="horizontal-line"></div>
 
   <!-- Section 1 - Mapbox ScrollingTelling Map -->
-  <div class="section part1">
+  <div class="section">
     <div class="mycontainer part1">
 
         <!-- Beginning Mapbox Scrolling Telling -->
         <div class="map_scrolltell">
         <!-- Map Title -->
-        <h1 class="map_h2">Stories behind the venues of the Youth Olympic Games, Lausanne 2020, Switzerland</h1>
-        
+        <h2 class="map_h2">Stories behind the venues of the Youth Olympic Games, Lausanne 2020, Switzerland</h2>
+        <h4 class="map_h4">Top hashtags by locations Lausanne2020 , January 2020</h4>
         <!-- ---- Div MapBox Map ---- -->
         <div class="map_mapbox"> 
           <div class="map">
-
-              <!-- Mapbox Style PopUp -->
-              <style>
-                #map {
-                    height: 80vh;
-                    width: 100%;
-                    position: absolute;
-                    z-index: -5;
-                }
-                #features {
-                  width: 50%;
-                  margin-left: 50%;
-                  font-family: sans-serif;
-                  overflow-y: scroll;
-                  background-color: #fafafa;
-                }
-            
-                section {
-                  padding: 25px 50px;
-                  line-height: 25px;
-                  border-bottom: 1px solid #ddd;
-                  opacity: 0.25;
-                  font-size: 13px;
-                }
-                section.active {
-                  opacity: 1;
-                }
-                section:last-child {
-                  border-bottom: none;
-                  margin-bottom: 200px;
-                }
-              </style>
-
-              <!-- ---- DivId MapBox ---- -->
               <div id="map"></div>
-
-              <!-- Div for all the text, called "features" -->
-              <div id='features'>
-                <section id='start' class='active'>
-                  <h5>What happen during the Youth Olympic Games?</h5>
-                  <p>This is the start.</p>
-                </section>
-
-                <section id='lausanne'>
-                  <h5>Lausanne</h5>
-                  <p>November 1895. London is shrouded in fog and Sherlock Holmes and
-                      Watson pass time restlessly awaiting a new case. "The London
-                      criminal is certainly a dull fellow," Sherlock bemoans. "There have
-                      been numerous petty thefts," Watson offers in response. Just then a
-                      telegram arrives from Sherlock's brother Mycroft with a mysterious
-                      case.
-                  </p>
-                </section>
-
-                <section id='lavallee'>
-                  <h5>La Vallée de Joux</h5>
-                  <p>La Vallée de Joux: Arthur Cadogan West was found dead, head crushed in on train tracks
-                      at Aldgate Station at 6AM Tuesday morning. West worked at Woolwich
-                      Arsenal on the Bruce-Partington submarine, a secret military
-                      project. Plans for the submarine had been stolen and seven of the
-                      ten missing papers were found in West's possession. Mycroft implores
-                      Sherlock to take the case and recover the three missing papers.
-                  </p>
-                </section>
-
-                <section id='lesalpes'>
-                  <h5>Les Alpes Vaudoises</h5>
-                  <p>Les Alpes Vaudoise, Villars, Leysin, les Diablerets: Holmes and Watson's investigations take them across London. Sherlock
-                      deduces that West was murdered elsewhere, then moved to Aldgate
-                      Station to create the illusion that he was crushed on the tracks by
-                      a train. On their way to Woolwich Sherlock dispatches a telegram to
-                      Mycroft at London Bridge: "Send list of all foreign spies known to
-                      be in England, with full address."
-                  </p>
-                </section>
-              </div>
               <!-- the javascript for mapbox -->
               <script>
                 mapboxgl.accessToken = 'pk.eyJ1IjoiYXZ1aWxsaSIsImEiOiJjazY1N3Q3MG4wOGFjM2tvNGo4aDlyamN5In0.sD99_EJ71yWj5o_Grdko0Q';
@@ -202,7 +126,7 @@
                     container: 'map', // container id
                     style: 'mapbox://styles/mapbox/light-v10',
                     // style: 'mapbox://styles/avuilli/ck9gyqj7y0usu1ir0ncbarwfz', // stylesheet location
-                    center: [6.8835, 46.5199], // starting position [lng, lat]
+                    center: [6.5835, 46.5199], // starting position [lng, lat]
                     zoom: 8, // starting zoom 
                     minZoom: 8 // Maximum Zoom out !
                   });
@@ -247,109 +171,77 @@
                       'type':'circle',
                       'source':'venues',
                       'paint':{
-                        'circle-stroke-color':'#de5b91',
+                        'circle-stroke-color':'#870b3e',
                         'circle-stroke-width':1,
-                        'circle-color':'#de5b91'
+                        'circle-color':'#870b3e'
+                      }
+                  });    
+                  
+                  map.addSource('social-media',{
+                      'type':'geojson',
+                      'data': 'http://cultureincities.com/sport/data/social/social_vaud_tophashtags_january_2020.geojson'      
+                  });
+                 
+                  map.addLayer({
+                      'id':'social-media-viz',
+                      'type':'circle',
+                      'source':'social-media',
+                      'paint':{
+                        'circle-color':'#de5b91',
+                        'circle-radius': 50,
+                        'circle-opacity': 0.4
                       }
                   });
-
-                  // Popup on Hover
-
-                  // Create a popup, but don't add it to the map yet.
-                    var popup = new mapboxgl.Popup({
-                      closeButton: false,
-                      closeOnClick: false
-                    });
                   
-                    // Change the cursor to a pointer when the mouse is over the location
-                    map.on('mouseenter', 'venues-viz', function(e) {
+                  // Change the cursor to a pointer when the mouse is over the location
+                  map.on('click', 'social-media-viz', function(e) {
+                  // Create Popup on Click
+                  new mapboxgl.Popup()
+                      .setLngLat(e.lngLat)
+                      .setHTML('<h5>Top 5 Hashtags in '+e.features[0].properties.location+'</h5>'
+                      +'<p>1. '+e.features[0].properties.hashtag_1+'</p>'
+                      +'<p>2. '+e.features[0].properties.hashtag_2+'</p>'
+                      +'<p>3. '+e.features[0].properties.hashtag_3+'</p>'
+                      +'<p>4. '+e.features[0].properties.hashtag_4+'</p>'
+                      +'<p>5. '+e.features[0].properties.hashtag_5+'</p>')
+                      .addTo(map);
+                  });
+                
+                  // Change cursos to a pointer when the mouse is over states layer!
+                  map.on('mouseenter', 'social-media-vi', function() {
                       map.getCanvas().style.cursor = 'pointer';
-                      popup
-                        .setLngLat(e.lngLat)
-                        .setHTML(e.features[0].properties.venues)
-                        .addTo(map);
-                    });
-                    
-                    // Change it back to when the mouse leaves, close the popup.
-                    map.on('mouseleave', 'venues-viz', function() {
-                        map.getCanvas().style.cursor = '';
-                        popup.remove()
-                      });
+                  });
+
+                  // Change it back to when the mouse leaves, close the popup!
+                  map.on('mouseleave', 'social-media-vi', function() {
+                      map.getCanvas().style.cursor = '';
+                  });
                 });
                 // ****************************************** //
-                // variables for the chapters 
-                var chapters = {
-                  'start':{
-                    bearing:0,
-                    center: [6.8322734, 46.3196535],
-                    zoom: 11,
-                    pitch:0
-                  },
-                  'lausanne':{
-                    bearing: 0,
-                    center: [6.6322734, 46.5196535],
-                    zoom: 13.6,
-                    pitch: 60,
-                    speed: 0.5
-                  },
-                  'lavallee':{
-                    bearing: -35,
-                    center: [6.25, 46.6],
-                    zoom: 13.0,
-                    pitch: 20
-                  },
-                  'lesalpes':{
-                    bearing: -88,
-                    center: [7.158056, 46.351389],
-                    zoom: 10.8,
-                    pitch: 30,
-                    speed:0.5
-                  }
-                }
-                // ****************************************** // 
-                // On every scroll event, check which element is on screen        
-                window.onscroll = function() {
-                  var chapterNames = Object.keys(chapters);
-                  for (var i = 0; i < chapterNames.length; i++) {
-                    var chapterName = chapterNames[i];
-                    
-                    if (isElementOnScreen(chapterName)) {
-                      setActiveChapter(chapterName);
-                      break;
-                    }
-                  }
-                };
-                // ****************************************** // 
-                var activeChapterName = 'start';
-                // var activeChapterName = 'Lausanne';
-
-                function setActiveChapter(chapterName) {
-                    if (chapterName === activeChapterName) return;
-
-                    map.flyTo(chapters[chapterName]);
-
-                    document.getElementById(chapterName).setAttribute('class', 'active');
-                    document.getElementById(activeChapterName).setAttribute('class', '');
-
-                    activeChapterName = chapterName;
-                }
-
-                function isElementOnScreen(id) {
-                    var element = document.getElementById(id);
-                    var bounds = element.getBoundingClientRect();
-                    return bounds.top < window.innerHeight && bounds.bottom > 0;
-                }
               </script>
 
-        <!-- End of Div MapBox  -->
-        </div>
+          <!-- End of div "map"  -->
+          </div>
+        <!-- End of div "mapbox"  -->
         </div>  
-      
-      </div>
-      <!-- End Mapbox Scrolling Telling --> 
+      <!-- End of div "map_scrolltell"  -->
+      </div> 
+
+      <!-- Beginn of div "mapcontainer_text" caption for the map-->
+      <div class="mapcontainer_text">
+        <h4 class="container_h4">Hashtags by Location</h4>
+        <p class="paragraph">Lausanne Youth Olympic Games took place in several part of western Switzerland. The three main locations were la Vallée de Joux, les Alpes vaudoises and Lausanne, the capital of the region.</p>
+        <p class="paragraph">La Vallée is famous for its ancient and low moutains, beautiful trees and large lakes. This location gives the perfect setting to host the cross-country or ski jumping competitions.
+        Les Alpes vaudoises are well-known for their white peaks, winter parks and numerous ski resorts. Leysin, Les Diablerets and Villars hosted the alpine competitions such as snowboarding, alpine skiing, freestyle skiing and ski moutaineering.
+        Lausanne, the olympic capital was the heart of the games. The city by the lake welcome the Olympic Village and the ice hockey, firgure skyting and speed skyting competitions. In the Olympic Village, the opening and closing ceremony also took place!</p>
+        <p class="paragraph">#Startnow, #Sport and #Suisse are popular hashtags for all the locations. Other like #Samsungyodlipark, #Icehockey and #Teamdeutschland are specific to a specific location.</p>
+      <!-- End of div "mapcontainer_text" map caption -->
+      </div>  
+   
+   <!-- End of div container "mycontainer part1" -->
     </div>
+  <!-- End of div section -->
   </div>
-  <!-- End Section 1 - Mapbox ScrollingTelling Map -->
 
   <!-- ************************** -->
   <div class="horizontal-line"></div>
@@ -482,7 +374,7 @@
       <div class="map_scrolltell">
         <h2 class="map_h2">Where did visitors stay during the Youth Olympic Games in Lausanne 2020, Switzerland</h1>
         <h4 class="map_h4">AirBnB Demand. Comparaison between January 2019 and January 2020. </h4>
-        
+
         <div class="map_mapbox">
           <div class="map-airbnb">
               
@@ -608,8 +500,7 @@
   <div class="section">
     <div class="mycontainer text">
       <h4 class="container_h4">Method</h4>
-      <p class="paragraph">Lausanne Sport Map and analysis has been made as part of the Bring Your Own Map CASA students project (#BYOM) that was presented over a Zoom call on 10th May 2020. We were interested in researching the social media and AirBnb activity of the Youth Olympic Games 2020. 
-      </p>
+      <p class="paragraph">Lausanne Sport Map and analysis has been made as part of the Bring Your Own Map CASA students project (#BYOM) that was presented over a Zoom call on 10th May 2020. We were interested in researching the social media and AirBnb activity of the Youth Olympic Games 2020.</p>
       <p>First, we collected social media data using the Twitter API and AirBnB data from Inside AirBnB, then shapefiles were downloaded from <a href="https://www.asitvd.ch/index.php?option=com_easysdi_catalog&view=sheet&guid=196&catalog=main&type=complete&preview=search_list&tmpl=component" target="_blank">Asitvd</a>. The data was then cleaned and analysed in <a href="https://github.com/cultureincities/sport/blob/master/code/Lausanne2020_EDA.ipynb" target="_blank">this Python notebook</a> before being visualized.</p>
     </div>
   </div>
@@ -619,7 +510,7 @@
   <div class="section footpage">
     <div class="mycontainer footpage">
       <div class="w-layout-grid grid footpage">
-        <div id="w-node-6a89eba55ef6-eba55ef2" class="grid_div nb2">
+          <div id="w-node-6a89eba55ef6-eba55ef2" class="grid_div nb2">
           <h4 class="grid_h4"><a href="https://twitter.com/vishalkumarldn" target="_blank">Vishal Kumar</a></h4>
           <p class="paragraph"></p>
         </div>

@@ -42,31 +42,9 @@
   margin-left: 20px;
 }
 
-.mycontainer.part1 {
-  display:flex;
-  position:relative;
-  /* display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  position:relative;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
-  -webkit-box-align: stretch;
-  -webkit-align-items: stretch;
-  -ms-flex-align: stretch;
-  align-items: stretch; */
-}
-
-.mycontainer.part3
-.mycontainer.part2 {
+.mycontainer.part1
+.mycontainer.part2
+.mycontainer.part3 {
   position:relative;
   display: flex;
   display: -webkit-box;
@@ -170,19 +148,6 @@
   -ms-flex: 1;
   flex: 1;
 }
-.map_textbox {
-  position:relative;
-  padding: 20px 20px;
-}
-
-.scroll_textbox-part1, .scroll_textbox-part2{
-  display:block;
-  position: relative;
-  margin: 0px 0px 30px 0px;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-}
 
 .map_h2 {
   margin-top: 0px;
@@ -220,23 +185,17 @@
 }
 
 .grid.footpage {
+  display: center;
   margin-top: 0px;
   margin-right: 0px;
-  margin-left: 0px;
+  margin-left: 100px;
   padding-top: 30px;
   -ms-grid-columns: 0.5fr 1fr 1fr 0.5fr;
   grid-template-columns: 0.5fr 1fr 1fr 0.5fr;
 }
 
-.grid_div.nb2 {
-  text-align: left;
-}
-
-.grid_div.nb3 {
-  text-align: left;
-}
-
 .grid_h4 {
+  width: 120px;
   font-family: Inconsolata, monospace;
 }
 
@@ -274,6 +233,9 @@
   .text {
     max-width: 70%;
   }
+  .grid.footpage {
+    display: center;
+  }
 }
 
 @media screen and (max-width: 767px) {
@@ -310,15 +272,12 @@
   .mapcontainer_text{
     padding: 20px 0px 0px 0px;
   }
+  .grid.footpage {
+    display: center;
+  }
 }
 
 @media screen and (max-width: 479px) {
-  .mycontainer.part1 {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-  }
   .project_name {
     padding-top: 20px;
   }
@@ -362,8 +321,7 @@
     color: #055e8e;
   }
   .grid.footpage {
-    -ms-grid-columns: 1fr 1fr;
-    grid-template-columns: 1fr 1fr;
+    display: center;
   }
 }
 
