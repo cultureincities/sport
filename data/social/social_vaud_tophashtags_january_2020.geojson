@@ -1,8 +1,8 @@
 {
 "type": "FeatureCollection",
 "features": [
-{ "type": "Feature", "properties": { "location": "La Valle", "hashtag_1": "startnow", "hashtag_2": "hockey", "hashtag_3": "skeleton", "hashtag_4": "winter", "hashtag_5": "teamdeutschland", "longitude": 6.25, "latitude": 46.6 }, "geometry": { "type": "Point", "coordinates": [ 6.25, 46.6 ] } },
+{ "type": "Feature", "properties": { "location": "La Vallée de Joux", "hashtag_1": "startnow", "hashtag_2": "hockey", "hashtag_3": "skeleton", "hashtag_4": "winter", "hashtag_5": "teamdeutschland", "longitude": 6.25, "latitude": 46.6 }, "geometry": { "type": "Point", "coordinates": [ 6.25, 46.6 ] } },
 { "type": "Feature", "properties": { "location": "Lausanne", "hashtag_1": "startnow", "hashtag_2": "sport", "hashtag_3": "icehockey", "hashtag_4": "joj", "hashtag_5": "suisse", "longitude": 6.6322734, "latitude": 46.5245535 }, "geometry": { "type": "Point", "coordinates": [ 6.6322734, 46.5245535 ] } },
-{ "type": "Feature", "properties": { "location": "Les Alpes", "hashtag_1": "suisse", "hashtag_2": "startnow", "hashtag_3": "samsungyodlipark", "hashtag_4": "figureskating", "hashtag_5": "sport", "longitude": 7.158056, "latitude": 46.351389 }, "geometry": { "type": "Point", "coordinates": [ 7.158056, 46.351389 ] } }
+{ "type": "Feature", "properties": { "location": "Les Alpes Vaudoises", "hashtag_1": "suisse", "hashtag_2": "startnow", "hashtag_3": "samsungyodlipark", "hashtag_4": "figureskating", "hashtag_5": "sport", "longitude": 7.158056, "latitude": 46.351389 }, "geometry": { "type": "Point", "coordinates": [ 7.158056, 46.351389 ] } }
 ]
 }
