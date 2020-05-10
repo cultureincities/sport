@@ -41,17 +41,17 @@
         body { margin-top: 0; padding: 0; }
         #map {  
                 position: absolute; 
-                margin: 0 auto;
-                padding: 0;
                 width: 100%;
                 height: 80vh;
+                margin: 0 auto;
+                padding: 0;
                }
         #map-airbnb {  
                 position: absolute; 
-                margin: 0 auto;
-                padding: 0;
                 width: 100%;
                 height: 80vh;
+                margin: 0 auto;
+                padding: 0;
                }
 
     </style>
@@ -66,6 +66,37 @@
   <!-- Promise polyfill script required to use Mapbox GL Geocoder in IE 11 -->
   <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+
+  <!-- ---------- Style for Scrolly Telling Mapbox ----------  -->
+  <!-- <style>
+    #map {  
+      position: fixed; 
+      width: 50%;
+    }
+
+    #features {
+      width: 50%;
+      margin-left: 50%;
+      font-family: sans-serif;
+      overflow-y: scroll;
+      background-color: #fafafa;
+    }
+
+    section {
+      padding: 25px 50px;
+      line-height: 25px;
+      border-bottom: 1px solid #ddd;
+      opacity: 0.25;
+      font-size: 13px;
+    }
+    section.active {
+      opacity: 1;
+    }
+    section:last-child {
+      border-bottom: none;
+      margin-bottom: 200px;
+    }
+ </style> -->
 
   <!-- ---------- Beginning of All Sections ----------  -->
   <!-- Section 0 - Website Title -->
@@ -90,14 +121,43 @@
 
         <!-- Beginning Mapbox Scrolling Telling -->
         <div class="map_scrolltell">
+        <!-- Map Title -->
         <h1 class="map_h2">Stories behind the venues of the Youth Olympic Games, Lausanne 2020, Switzerland</h1>
         
-        <!-- ---- Div MapBox ---- -->
+        <!-- ---- Div MapBox Map ---- -->
         <div class="map_mapbox"> 
           <div class="map">
 
               <!-- Mapbox Style PopUp -->
               <style>
+                #map {  
+                  position: fixed; 
+                  width: 50%;
+                }
+            
+                #features {
+                  width: 50%;
+                  margin-left: 50%;
+                  font-family: sans-serif;
+                  overflow-y: scroll;
+                  background-color: #fafafa;
+                }
+            
+                section {
+                  padding: 25px 50px;
+                  line-height: 25px;
+                  border-bottom: 1px solid #ddd;
+                  opacity: 0.25;
+                  font-size: 13px;
+                }
+                section.active {
+                  opacity: 1;
+                }
+                section:last-child {
+                  border-bottom: none;
+                  margin-bottom: 200px;
+                }
+
                 .mapboxgl-popup-content {
                   max-width: 400px;
                   font: 12px/20px 'Montserrat', Arial, Helvetica, sans-serif;
@@ -125,6 +185,46 @@
               <!-- ---- DivId MapBox ---- -->
               <div id="map"></div>
 
+              <!-- Div for all the text, called "features" -->
+              <div id='features'>
+                <section id='start' class='active'>
+                  <h5>What happen during the Youth Olympic Games?</h5>
+                  <p>This is the start.</p>
+                </section>
+
+                <section id='lausanne'>
+                  <h5>Lausanne</h5>
+                  <p>November 1895. London is shrouded in fog and Sherlock Holmes and
+                      Watson pass time restlessly awaiting a new case. "The London
+                      criminal is certainly a dull fellow," Sherlock bemoans. "There have
+                      been numerous petty thefts," Watson offers in response. Just then a
+                      telegram arrives from Sherlock's brother Mycroft with a mysterious
+                      case.
+                  </p>
+                </section>
+
+                <section id='lavallee'>
+                  <h5>La Vallée de Joux</h5>
+                  <p>La Vallée de Joux: Arthur Cadogan West was found dead, head crushed in on train tracks
+                      at Aldgate Station at 6AM Tuesday morning. West worked at Woolwich
+                      Arsenal on the Bruce-Partington submarine, a secret military
+                      project. Plans for the submarine had been stolen and seven of the
+                      ten missing papers were found in West's possession. Mycroft implores
+                      Sherlock to take the case and recover the three missing papers.
+                  </p>
+                </section>
+
+                <section id='lesalpes'>
+                  <h5>Les Alpes Vaudoises</h5>
+                  <p>Les Alpes Vaudoise, Villars, Leysin, les Diablerets: Holmes and Watson's investigations take them across London. Sherlock
+                      deduces that West was murdered elsewhere, then moved to Aldgate
+                      Station to create the illusion that he was crushed on the tracks by
+                      a train. On their way to Woolwich Sherlock dispatches a telegram to
+                      Mycroft at London Bridge: "Send list of all foreign spies known to
+                      be in England, with full address."
+                  </p>
+                </section>
+              </div>
               <!-- the javascript for mapbox -->
               <script>
                 mapboxgl.accessToken = 'pk.eyJ1IjoiYXZ1aWxsaSIsImEiOiJjazY1N3Q3MG4wOGFjM2tvNGo4aDlyamN5In0.sD99_EJ71yWj5o_Grdko0Q';
@@ -207,11 +307,74 @@
                         popup.remove()
                       });
                 });
+                // ****************************************** //
+                // variables for the chapters 
+                var chapters = {
+                  'start':{
+                    bearing:0,
+                    center: [6.8322734, 46.3196535],
+                    zoom: 11,
+                    pitch:0
+                  },
+                  'lausanne':{
+                    bearing: 0,
+                    center: [6.6322734, 46.5196535],
+                    zoom: 13.6,
+                    pitch: 60,
+                    speed: 0.5
+                  },
+                  'lavallee':{
+                    bearing: -35,
+                    center: [6.25, 46.6],
+                    zoom: 13.0,
+                    pitch: 20
+                  },
+                  'lesalpes':{
+                    bearing: -88,
+                    center: [7.158056, 46.351389],
+                    zoom: 10.8,
+                    pitch: 30,
+                    speed:0.5
+                  }
+                }
+                // ****************************************** // 
+                // On every scroll event, check which element is on screen        
+                window.onscroll = function() {
+                  var chapterNames = Object.keys(chapters);
+                  for (var i = 0; i < chapterNames.length; i++) {
+                    var chapterName = chapterNames[i];
+                    
+                    if (isElementOnScreen(chapterName)) {
+                      setActiveChapter(chapterName);
+                      break;
+                    }
+                  }
+                };
+                // ****************************************** // 
+                var activeChapterName = 'start';
+                // var activeChapterName = 'Lausanne';
+
+                function setActiveChapter(chapterName) {
+                    if (chapterName === activeChapterName) return;
+
+                    map.flyTo(chapters[chapterName]);
+
+                    document.getElementById(chapterName).setAttribute('class', 'active');
+                    document.getElementById(activeChapterName).setAttribute('class', '');
+
+                    activeChapterName = chapterName;
+                }
+
+                function isElementOnScreen(id) {
+                    var element = document.getElementById(id);
+                    var bounds = element.getBoundingClientRect();
+                    return bounds.top < window.innerHeight && bounds.bottom > 0;
+                }
+
               </script>
 
         <!-- End of Div MapBox  -->
         </div>
-
         </div>  
       
       </div>
@@ -250,11 +413,13 @@
   <!-- Section 3 - AirBnb Map -->
   <div class="section">
     <div class="mycontainer part3">
-      <div class="text_airbnb"></div>
-      <div class="map_airbnb">
+
+     <!-- Beginning Mapbox Airbnb -->
+      <div class="map_scrolltell">
         <h1 class="map_h2">Where to stay during the Youth Olympic Games in Lausanne 2020, Switzerland</h1>
+        
         <div class="map_mapbox">
-          <div class="map-airbnb"></div>
+          <div class="map-airbnb">
               
               <!-- ---- DivId MapBox ---- -->
               <div id="map-airbnb"></div>
@@ -341,13 +506,28 @@
                 });
               </script>
 
-        <!-- End of Div MapBox  -->
+          <!-- End of Div Map AirBnB  -->
+          </div>
+        <!-- End of Div Map MapBox  -->  
+        </div>
+
+    <!-- End of Div Map Section3 --> 
+    </div>
+      <div class="map_textbox">
+        <p class="paragraph">Introduction to Lausanne 2020 - Youth Olampic Games</p>
+        <div class="scroll_textbox-part1">
+          <div class="fly-dis">Lausanne</div>
+        </div>
+        <div class="scroll_textbox-part2">
+          <div class="fly-dis">La Vallé de Joux</div>
         </div>
       </div>
-    </div>
-  </div>
-  <!-- End Section 3 - AirBnb Map -->
 
+    <!-- End of Section3 Container -->
+    </div>
+  <!-- End Section 3 - AirBnb Map -->
+  </div>
+  
   <div class="horizontal-line"></div>
 
   <!-- Section 4 - Methods -->

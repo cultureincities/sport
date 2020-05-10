@@ -12,7 +12,7 @@
 
 .section {
   background-color: transparent;
-}
+} 
 
 .section.title {
   background-color: rgba(5, 94, 142, 0.2);
@@ -25,7 +25,9 @@
 
 .mycontainer {
   height: auto;
-  margin: 20px;
+  margin-top: 10px;
+  margin-left:20px;
+  margin-right:20px;
   padding-top: 0px;
   padding-right: 0px;
   padding-bottom: 0px;
@@ -42,36 +44,12 @@
   margin-left: 20px;
 }
 
-.mycontainer.part1 {
-  display:flex;
-  position:relative;
-
-  /* display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  position:relative;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
-  -webkit-box-align: stretch;
-  -webkit-align-items: stretch;
-  -ms-flex-align: stretch;
-  align-items: stretch; */
-}
-
-.mycontainer.part3 {
+/*.mycontainer.part3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-}
+} */
 
 .mycontainer.text {
   max-width: 60%;
@@ -122,15 +100,26 @@
   line-height: 20px;
 }
 
-.map_scrolltell {
+/* DELETE this style based on the Pudding */
+/* Change this style based on the Pudding */
+
+/* .map_scrolltell {
+   position: relative;
+   top: auto; 
+   left: auto; 
+   bottom: auto; 
+   right: auto; 
+   margin: 0px; 
+   display: block;  
+   box-sizing: content-box; 
+   min-width: 600px; 
+   width: auto; 
+   min-height: 700px; 
+   height: auto;
+ } */
+
+.map_mapbox {
   position: relative;
-  left: auto;
-  display: block;
-  width: auto;
-  height: auto;
-  min-height: 700px;
-  min-width: 400px;
-  margin-top: 0px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
@@ -150,12 +139,32 @@
   flex: 1;
 }
 
-.map_textbox {
-  position:relative;
-  padding: 20px 20px;
-}
 
-.scroll_textbox-part1, .scroll_textbox-part2{
+/* Add this style based on the Pudding */
+/* Add the entire style for this box 
+refer to left-container-map-fixed */
+/* .map_mapbox {
+  position:relative;
+  margin: auto;
+  top:0px;
+  left:0px;
+  bottom:auto;
+  right:auto;
+}  */
+/* Add the entire style for this box 
+refer to left-container-map-fixed */
+/* mycontainer.part1.map {
+  position:relative;
+  width: 600px;
+} */
+
+/* Add this style based on the Pudding */
+/* .map_textbox {
+  pointer-events:none;
+  position:relative;
+  width:calc(100%-600px);
+} */
+/* .scroll_textbox-part1, .scroll_textbox-part2{
   display:block;
   position: relative;
   margin: 0px 0px 30px 0px;
@@ -163,10 +172,9 @@
   font-size: 100%;
   font: inherit;
 }
-
+*/
 
 .map_h2 {
-  margin-top: 0px;
   font-family: Inconsolata, monospace;
   color: #055e8e;
   font-size: 26px;
@@ -230,12 +238,6 @@
     font-size: 36px;
     line-height: 42px;
   }
-  .map_scrolltell {
-    -webkit-box-ordinal-group: 0;
-    -webkit-order: -1;
-    -ms-flex-order: -1;
-    order: -1;
-  }
   .map_h2 {
     font-size: 24px;
     line-height: 28px;
@@ -259,15 +261,6 @@
   .project_h1 {
     font-size: 32px;
     line-height: 38px;
-  }
-  .map_scrolltell {    
-    -webkit-box-ordinal-group: 0;
-    -webkit-order: -1;
-    -ms-flex-order: -1;
-    order: -1;
-  }
-  .map_textbox {
-    min-width: auto;
   }
   .map_h2 {
     font-size: 20px;
@@ -297,25 +290,11 @@
   .paragraph {
     font-size: 12px;
   }
-  .map_scrolltell {
-    width: 100%;
-    -webkit-box-ordinal-group: 0;
-    -webkit-order: -1;
-    -ms-flex-order: -1;
-    order: -1;
-  }
   .horizontal-line {
     margin-top: 10px;
     margin-bottom: 10px;
     border-width: 2px;
     border-color: #de5b91;
-  }
-
-  .text_airbnb {
-    -webkit-box-ordinal-group: 1;
-    -webkit-order: 0;
-    -ms-flex-order: 0;
-    order: 0;
   }
   .method_h4 {
     color: #055e8e;
