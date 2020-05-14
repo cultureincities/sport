@@ -158,12 +158,12 @@
   font-weight: 400;
 }
 .map_h4 {
-  margin-top: 0px;
+  margin-top: 10px;
   font-family: Inconsolata, monospace;
   color: #055e8e;
   font-size: 14px;
   line-height: 16px;
-  font-weight: 400;
+  font-weight: 700;
 }
 .horizontal-line {
   margin: 20px 20px;
