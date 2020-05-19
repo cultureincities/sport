@@ -18,6 +18,7 @@
   <link href="css/normalize.css" rel="stylesheet" type="text/css">
   <link href="css/webflow.css" rel="stylesheet" type="text/css">
   <link href="css/sport-byom.webflow.css" rel="stylesheet" type="text/css">
+  <link href="css/map-style.css" rel="stylesheet" type="text/css">
 
   
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
@@ -36,59 +37,20 @@
   <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
   <script src="https://api.mapbox.com/mapbox-gl-js/v1.9.1/mapbox-gl.js"></script>
   <link href="https://api.mapbox.com/mapbox-gl-js/v1.9.1/mapbox-gl.css" rel="stylesheet">
+  <!-- Add mapbox libraries for SCROLLYTELLING map-->
+  <title>Scrollytelling Template</title>  
+  <script src="https://unpkg.com/intersection-observer@0.5.1/intersection-observer.js"></script>
+  <script src="https://unpkg.com/scrollama"></script>
+  <!-- <script src="https://unpkg.com/stickyfill"></script> -->
+  <script src="https://unpkg.com/d3@5.9.1/dist/d3.min.js"></script>
+  <script src="https://unpkg.com/intersection-observer@0.5.1/intersection-observer.js"></script>
+
 
   <!-- add mapbox styles -->
-    <style>
-        body { margin-top: 0; padding: 0; }
-        #map {  
-                position: absolute; 
-                width: 100%;
-                height: 80vh;
-                margin: 0 auto;
-                padding: 0;
-               }
-        #map-airbnb {  
-                position: absolute; 
-                width: 100%;
-                height: 80vh;
-                margin: 0 auto;
-                padding: 0;
-               }
-        #map-sm{  
-                position: absolute; 
-                width: 100%;
-                height: 80vh;
-                margin: 0 auto;
-                padding: 0;
-               }
-
-        .mapboxgl-popup {
-                  max-width: 400px;
-                  font: 12px/20px 'Montserrat', Arial, Helvetica, sans-serif;
-                }
-        .mapboxgl-popup-content {
-                  margin: 0;
-                  padding: 10px;
-                  border-radius: 2px 2px 0 0;
-                  font-weight: 400;
-                  margin-top: 0px;
-                 }  
-        .mapboxgl-popup-content h5 {
-                  color: #de5b91;
-                  font-weight: 400;
-                 }         
-    </style>
 </head>
 
 <!-- the body -->
 <body class="body">
-
-  <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.min.js"></script>
-  <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.css" type="text/css"/>
-  <!-- Promise polyfill script required to use Mapbox GL Geocoder in IE 11 -->
-  <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
-
   <!-- ---------- Beginning of All Sections ----------  -->
   <!-- Section 0 - Website Title -->
   <div class="section title">
@@ -104,145 +66,52 @@
   </div>
   <!-- End Section 0 - Website Title -->
   
+  <!-- ************************** -->
   <div class="horizontal-line"></div>
+  <!-- ************************** -->
 
   <!-- Section 1 - Mapbox ScrollingTelling Map -->
+  <main>
   <div class="section">
-    <div class="mycontainer part1">
+    <div class="mycontainer" id="scrolly">
 
-        <!-- Beginning Mapbox Scrolling Telling -->
-        <div class="map_scrolltell">
-        <!-- Map Title -->
-        <h2 class="map_h2">Stories behind the venues of the Youth Olympic Games, Lausanne 2020, Switzerland</h2>
-        <h4 class="map_h4">Top hashtags by locations Lausanne2020 , January 2020</h4>
-        <!-- ---- Div MapBox Map ---- -->
-        <div class="map_mapbox"> 
-          <div class="map">
-              <div id="map"></div>
-              <!-- the javascript for mapbox -->
-              <script>
-                mapboxgl.accessToken = 'pk.eyJ1IjoiYXZ1aWxsaSIsImEiOiJjazY1N3Q3MG4wOGFjM2tvNGo4aDlyamN5In0.sD99_EJ71yWj5o_Grdko0Q';
-
-                var map = new mapboxgl.Map({
-                    container: 'map', // container id
-                    style: 'mapbox://styles/mapbox/light-v10',
-                    // style: 'mapbox://styles/avuilli/ck9gyqj7y0usu1ir0ncbarwfz', // stylesheet location
-                    center: [6.5835, 46.5199], // starting position [lng, lat]
-                    zoom: 8, // starting zoom 
-                    minZoom: 8 // Maximum Zoom out !
-                  });
-
-                // https://docs.mapbox.com/help/tutorials/create-interactive-hover-effects-with-mapbox-gl-js/
-                
-                //main function to load the map
-                map.on('load', function() {  
-
-                  map.addSource('geoboundaries',{
-                      'type':'geojson',
-                      'data': 'http://cultureincities.com/sport/data/GeoJson/geometry_venues.geojson'      
-                   });  
-
-                  map.addLayer({
-                      'id': 'geoboundaries-fill-viz',
-                      'type': 'fill',
-                      'source': 'geoboundaries',
-                      'paint': {
-                        'fill-color': '#055e8e',
-                        'fill-opacity': 0.2
-                      }
-                  }); 
-
-                  map.addLayer({
-                      'id': 'geoboundaries-line-viz',
-                      'type': 'line',
-                      'source': 'geoboundaries',
-                      'paint': {
-                        'line-color': '#055e8e',
-                        'line-width': 0.4
-                      }
-                  });              
-
-                  map.addSource('venues',{
-                      'type':'geojson',
-                      'data': 'http://cultureincities.com/sport/data/GeoJson/lausanne2020_venues.geojson'      
-                  });
-                 
-                  map.addLayer({
-                      'id':'venues-viz',
-                      'type':'circle',
-                      'source':'venues',
-                      'paint':{
-                        'circle-stroke-color':'#870b3e',
-                        'circle-stroke-width':1,
-                        'circle-color':'#870b3e'
-                      }
-                  });    
-                  
-                  map.addSource('social-media',{
-                      'type':'geojson',
-                      'data': 'http://cultureincities.com/sport/data/social/social_vaud_tophashtags_january_2020.geojson'      
-                  });
-                 
-                  map.addLayer({
-                      'id':'social-media-viz',
-                      'type':'circle',
-                      'source':'social-media',
-                      'paint':{
-                        'circle-color':'#de5b91',
-                        'circle-radius': 50,
-                        'circle-opacity': 0.4
-                      }
-                  });
-                  
-                  // Change the cursor to a pointer when the mouse is over the location
-                  map.on('click', 'social-media-viz', function(e) {
-                  // Create Popup on Click
-                  new mapboxgl.Popup()
-                      .setLngLat(e.lngLat)
-                      .setHTML('<h5>Top 5 Hashtags in '+e.features[0].properties.location+'</h5>'
-                      +'<p>1. '+e.features[0].properties.hashtag_1+'</p>'
-                      +'<p>2. '+e.features[0].properties.hashtag_2+'</p>'
-                      +'<p>3. '+e.features[0].properties.hashtag_3+'</p>'
-                      +'<p>4. '+e.features[0].properties.hashtag_4+'</p>'
-                      +'<p>5. '+e.features[0].properties.hashtag_5+'</p>')
-                      .addTo(map);
-                  });
-                
-                  // Change cursos to a pointer when the mouse is over states layer!
-                  map.on('mouseenter', 'social-media-vi', function() {
-                      map.getCanvas().style.cursor = 'pointer';
-                  });
-
-                  // Change it back to when the mouse leaves, close the popup!
-                  map.on('mouseleave', 'social-media-vi', function() {
-                      map.getCanvas().style.cursor = '';
-                  });
-                });
-                // ****************************************** //
-              </script>
-
-          <!-- End of div "map"  -->
+        <!-- Mapbox ScrollyTelling Map -->
+        <div class="figure_mapbox">
+          <h2 class='map_h2'>Stories behind the venues of the Youth Olympic Games, Lausanne 2020, Switzerland.</h2>
+          <div id="map"></div>
+        </div>
+        
+        <!-- Narrative for Mapbox ScrollyTelling Map -->
+        <article id="article_mapbox">
+          <div class='step' id="intro">
+            <h4 class='map_h4'>Welcome to Lausanne2020</h4>
+            <img src='http://cultureincities.com/sport/images/lausanne_torch.png'></img>
+            <p>The 2020 Youth Olympic Games took place in Lausanne, Switzerland in January.</p>
           </div>
-        <!-- End of div "mapbox"  -->
-        </div>  
-      <!-- End of div "map_scrolltell"  -->
-      </div> 
-
-      <!-- Beginn of div "mapcontainer_text" caption for the map-->
-      <div class="mapcontainer_text">
-        <h4 class="container_h4">Hashtags by Location</h4>
-        <p class="paragraph">Lausanne Youth Olympic Games took place in several part of western Switzerland. The three main locations were la Vallée de Joux, les Alpes vaudoises and Lausanne, the capital of the region.</p>
-        <p class="paragraph">La Vallée is famous for its ancient and low moutains, beautiful trees and large lakes. This location gives the perfect setting to host the cross-country or ski jumping competitions.
-        Les Alpes vaudoises are well-known for their white peaks, winter parks and numerous ski resorts. Leysin, Les Diablerets and Villars hosted the alpine competitions such as snowboarding, alpine skiing, freestyle skiing and ski moutaineering.
-        Lausanne, the olympic capital was the heart of the games. The city by the lake welcome the Olympic Village and the ice hockey, firgure skyting and speed skyting competitions. In the Olympic Village, the opening and closing ceremony also took place!</p>
-        <p class="paragraph">#Startnow, #Sport and #Suisse are popular hashtags for all the locations. Other like #Samsungyodlipark, #Icehockey and #Teamdeutschland are specific to a specific location.</p>
-      <!-- End of div "mapcontainer_text" map caption -->
-      </div>  
-   
-   <!-- End of div container "mycontainer part1" -->
+          <div class='step' id="lausanne">
+            <h4 class='map_h4'>Lausanne - The Olympic Hub</h4>
+            <img src='http://cultureincities.com/sport/images/speepdskating_photosgraphy.png'></img>
+            <p>Lausanne was a the heart of the Games.</p>
+          </div>
+				  <div class='step' id="lavallee">
+            <h4 class='map_h4'>La Vallée de Joux</h4>
+            <img src='http://cultureincities.com/sport/images/lavalllee_jedleicesterpic.png'></img>
+            <p>La Vallée de Joux is in the Jura. Famous for old and small moutains.</p>
+            </div>
+				  <div class='step' id="lesalpes">
+            <h4 class='map_h4'>Les Alpes Vaudoises</h4>
+            <img src='http://cultureincities.com/sport/images/lesalpes_dustyhenricksenusa.png'></img>
+            <p>Leysin, Les Diablerets and Villards are three ski resort in the Vaudoise Alpes.</p>
+          </div>
+        </article>
+        
+        <!-- Javascript for Mapbox ScrollingTelling Map -->
+        <script src="js/mapbox_scrollama.js"></script>
+    
     </div>
-  <!-- End of div section -->
   </div>
+
+  </main>
 
   <!-- ************************** -->
   <div class="horizontal-line"></div>
