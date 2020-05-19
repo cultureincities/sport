@@ -10,6 +10,7 @@
   grid-column-gap: 16px;
 }
 
+/* important */
 .section {
   background-color: transparent;
 }
@@ -23,6 +24,7 @@
   background-color: rgba(5, 94, 142, 0.2);
 }
 
+/* important */
 .mycontainer {
   height: auto;
   margin: 20px;
@@ -149,6 +151,7 @@
   flex: 1;
 }
 
+/* important */
 .map_h2 {
   margin-top: 0px;
   font-family: Inconsolata, monospace;
